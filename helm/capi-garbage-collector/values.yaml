@@ -1,0 +1,16 @@
+project:
+  branch: "[[ .Branch ]]"
+  commit: "[[ .SHA ]]"
+
+image:
+  registry: quay.io
+  name: giantswarm/capi-garbage-collector
+  tag: "[[ .Version ]]"
+  pullPolicy: IfNotPresent
+
+
+pod:
+  user:
+    id: "65532"
+  group:
+    id: "65532"

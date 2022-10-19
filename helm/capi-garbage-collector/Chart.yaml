@@ -1,0 +1,12 @@
+apiVersion: v2
+
+name: capi-garbage-collector
+description: Cleanups CAPI stuck resources
+
+version: "[[ .Version ]]"
+appVersion: "[[ .AppVersion ]]"
+
+home: https://github.com/giantswarm/capi-garbage-collector
+
+annotations:
+  application.giantswarm.io/team: hydra
