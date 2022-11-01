@@ -1,6 +1,12 @@
 domain: giantswarm.io
 layout:
 - go.kubebuilder.io/v4-alpha
-projectName: aws-network-topology-operator
-repo: github.com/giantswarm/aws-network-topology-operator
+projectName: capi-garbage-collector
+repo: github.com/giantswarm/capi-garbage-collector
+resources:
+- controller: true
+  domain: giantswarm.io
+  group: infrastructure.cluster.x-k8s.io
+  kind: GCPCluster
+  version: v1beta1
 version: "3"

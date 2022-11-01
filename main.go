@@ -17,12 +17,14 @@ limitations under the License.
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
 
 	// Import all Kubernetes client auth plugins (e.g. Azure, GCP, OIDC, etc.)
 	// to ensure that exec-entrypoint and run can make use of them.
+	compute "cloud.google.com/go/compute/apiv1"
 	_ "k8s.io/client-go/plugin/pkg/client/auth"
 
 	"k8s.io/apimachinery/pkg/runtime"
@@ -35,6 +37,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	"github.com/giantswarm/capi-garbage-collector/controllers"
+	"github.com/giantswarm/capi-garbage-collector/pkg/gcp/compute/routes"
+	capg "sigs.k8s.io/cluster-api-provider-gcp/api/v1beta1"
 	// +kubebuilder:scaffold:imports
 )
 
@@ -47,6 +51,8 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 	utilruntime.Must(capi.AddToScheme(scheme))
 	utilruntime.Must(capa.AddToScheme(scheme))
+
+	utilruntime.Must(capg.AddToScheme(scheme))
 
 	// +kubebuilder:scaffold:scheme
 }
@@ -108,7 +114,25 @@ func main() {
 		os.Exit(1)
 	}
 
-	// +kubebuilder:scaffold:builder
+	ctx := context.Background()
+	gcpRoutesClient, err := compute.NewRoutesRESTClient(ctx)
+	if err != nil {
+        setupLog.Error(err, "failed to create gcp compute routes client")
+        os.Exit(1)
+	}
+
+	defer gcpRoutesClient.Close()
+
+	routesClient := routes.NewClient(gcpRoutesClient)
+	gcpClusterReconciler := controllers.NewGCPClusterReconciler(
+	    mgr.GetClient(),
+	    routesClient,
+	)
+
+	if err = gcpClusterReconciler.SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "GCPCluster")
+		os.Exit(1)
+	}
 
 	if err := mgr.AddHealthzCheck("healthz", healthz.Ping); err != nil {
 		setupLog.Error(err, "unable to set up health check")
