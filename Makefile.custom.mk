@@ -11,7 +11,7 @@ CLUSTER ?= acceptance
 MANAGEMENT_CLUSTER_NAME ?= test-mc
 MANAGEMENT_CLUSTER_NAMESPACE ?= test
 
-
+ENVTEST_K8S_VERSION = 1.23
 ##@ Development
 
 .PHONY: lint-imports

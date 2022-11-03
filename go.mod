@@ -12,6 +12,7 @@ replace (
 require (
 	github.com/giantswarm/microerror v0.4.0
 	github.com/go-logr/logr v1.2.3
+	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/ginkgo/v2 v2.4.0
 	github.com/onsi/gomega v1.24.0
 	google.golang.org/api v0.100.0
@@ -28,8 +29,10 @@ require (
 	cloud.google.com/go/compute/metadata v0.1.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.6.0 // indirect
+	github.com/nxadm/tail v1.4.8 // indirect
 	go.opencensus.io v0.23.0 // indirect
 	google.golang.org/grpc v1.50.1 // indirect
+	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 )
 
 require (

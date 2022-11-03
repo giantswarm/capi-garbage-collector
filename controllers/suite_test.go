@@ -18,7 +18,9 @@ package controllers_test
 
 import (
 	"context"
+	"fmt"
 	"go/build"
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -72,6 +74,8 @@ var _ = BeforeSuite(func() {
 	utilruntime.Must(capg.AddToScheme(scheme))
 
 	logf.SetLogger(zap.New(zap.WriteTo(GinkgoWriter), zap.UseDevMode(true)))
+
+	getEnvOrSkip("KUBEBUILDER_ASSETS")
 	var err error
 	// cfg is defined in this file globally.
 	cfg, err = testEnv.Start()
@@ -99,3 +103,11 @@ var _ = AfterSuite(func() {
 	err := testEnv.Stop()
 	Expect(err).NotTo(HaveOccurred())
 })
+
+func getEnvOrSkip(env string) string {
+	value := os.Getenv(env)
+	if value == "" {
+		Skip(fmt.Sprintf("%s not exported", env))
+	}
+	return value
+}
