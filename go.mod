@@ -28,7 +28,11 @@ require (
 	cloud.google.com/go/compute/metadata v0.1.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.6.0 // indirect
+	github.com/maxbrunsfeld/counterfeiter/v6 v6.5.0 // indirect
 	go.opencensus.io v0.23.0 // indirect
+	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
+	golang.org/x/tools v0.1.12 // indirect
+	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/grpc v1.50.1 // indirect
 )
 
