@@ -14,6 +14,11 @@ jobs:
 workflows:
   test-and-push:
     jobs:
+      - unit-tests:
+          filters:
+            tags:
+              only: /^v.*/
+
       - architect/go-build:
           context: architect
           name: go-build
