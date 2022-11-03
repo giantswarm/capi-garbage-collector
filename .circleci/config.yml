@@ -24,6 +24,8 @@ workflows:
           name: go-build
           binary: capi-garbage-collector
           resource_class: xlarge
+          requires:
+            - unit-tests
           filters:
             tags:
               only: /^v.*/
