@@ -69,8 +69,7 @@ func (c *Client) deleteRoute(ctx context.Context, route *computepb.Route, projec
 		return err
 	}
 
-	err = op.Wait(ctx)
-	return err
+	return op.Wait(ctx)
 }
 
 func (c *Client) getLogger(ctx context.Context) logr.Logger {
