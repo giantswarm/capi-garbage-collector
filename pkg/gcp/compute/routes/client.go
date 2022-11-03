@@ -29,8 +29,8 @@ func (c *Client) DeleteRoutes(ctx context.Context, cluster *capg.GCPCluster) err
 	filter := fmt.Sprintf(`name : "%s*"`, cluster.Name)
 
 	req := &computepb.ListRoutesRequest{
-		Filter:               &filter,
-		Project:              project,
+		Filter:  &filter,
+		Project: project,
 	}
 
 	it := c.routesClient.List(ctx, req)
@@ -60,8 +60,8 @@ func (c *Client) DeleteRoutes(ctx context.Context, cluster *capg.GCPCluster) err
 
 func (c *Client) deleteRoute(ctx context.Context, route *computepb.Route, project string) error {
 	req := &computepb.DeleteRouteRequest{
-		Project:   project,
-		Route:     *route.Name,
+		Project: project,
+		Route:   *route.Name,
 	}
 
 	op, err := c.routesClient.Delete(ctx, req)

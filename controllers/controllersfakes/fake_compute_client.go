@@ -5,8 +5,9 @@ import (
 	"context"
 	"sync"
 
-	"github.com/giantswarm/capi-garbage-collector/controllers"
 	"sigs.k8s.io/cluster-api-provider-gcp/api/v1beta1"
+
+	"github.com/giantswarm/capi-garbage-collector/controllers"
 )
 
 type FakeComputeClient struct {

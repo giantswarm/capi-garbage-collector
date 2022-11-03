@@ -36,9 +36,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
+	capg "sigs.k8s.io/cluster-api-provider-gcp/api/v1beta1"
+
 	"github.com/giantswarm/capi-garbage-collector/controllers"
 	"github.com/giantswarm/capi-garbage-collector/pkg/gcp/compute/routes"
-	capg "sigs.k8s.io/cluster-api-provider-gcp/api/v1beta1"
 	// +kubebuilder:scaffold:imports
 )
 
@@ -117,16 +118,16 @@ func main() {
 	ctx := context.Background()
 	gcpRoutesClient, err := compute.NewRoutesRESTClient(ctx)
 	if err != nil {
-        setupLog.Error(err, "failed to create gcp compute routes client")
-        os.Exit(1)
+		setupLog.Error(err, "failed to create gcp compute routes client")
+		os.Exit(1)
 	}
 
 	defer gcpRoutesClient.Close()
 
 	routesClient := routes.NewClient(gcpRoutesClient)
 	gcpClusterReconciler := controllers.NewGCPClusterReconciler(
-	    mgr.GetClient(),
-	    routesClient,
+		mgr.GetClient(),
+		routesClient,
 	)
 
 	if err = gcpClusterReconciler.SetupWithManager(mgr); err != nil {

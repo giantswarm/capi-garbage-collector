@@ -22,10 +22,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/giantswarm/capi-garbage-collector/controllers/controllersfakes"
 	"github.com/google/uuid"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+
+	"github.com/giantswarm/capi-garbage-collector/controllers/controllersfakes"
 
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -42,15 +43,15 @@ import (
 )
 
 var (
-    cfg *rest.Config
-    k8sClient client.Client
-    testEnv *envtest.Environment
-    namespace string
-    scheme = runtime.NewScheme()
-    fakeComputeClient *controllersfakes.FakeComputeClient
+	cfg               *rest.Config
+	k8sClient         client.Client
+	testEnv           *envtest.Environment
+	namespace         string
+	scheme            = runtime.NewScheme()
+	fakeComputeClient *controllersfakes.FakeComputeClient
 
-    ctx    context.Context
-    cancel  context.CancelFunc
+	ctx    context.Context
+	cancel context.CancelFunc
 )
 
 func TestAPIs(t *testing.T) {
@@ -86,7 +87,7 @@ var _ = BeforeSuite(func() {
 	Expect(err).NotTo(HaveOccurred())
 	Expect(k8sClient).NotTo(BeNil())
 
-    ctx, cancel = context.WithCancel(context.Background())
+	ctx, cancel = context.WithCancel(context.Background())
 })
 
 var _ = BeforeEach(func() {
