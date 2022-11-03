@@ -26,8 +26,6 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/giantswarm/capi-garbage-collector/controllers/controllersfakes"
-
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -48,7 +46,6 @@ var (
 	testEnv           *envtest.Environment
 	namespace         string
 	scheme            = runtime.NewScheme()
-	fakeComputeClient *controllersfakes.FakeComputeClient
 
 	ctx    context.Context
 	cancel context.CancelFunc
