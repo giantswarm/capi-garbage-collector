@@ -41,11 +41,11 @@ import (
 )
 
 var (
-	cfg               *rest.Config
-	k8sClient         client.Client
-	testEnv           *envtest.Environment
-	namespace         string
-	scheme            = runtime.NewScheme()
+	cfg       *rest.Config
+	k8sClient client.Client
+	testEnv   *envtest.Environment
+	namespace string
+	scheme    = runtime.NewScheme()
 
 	ctx    context.Context
 	cancel context.CancelFunc
