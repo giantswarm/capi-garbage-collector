@@ -24,7 +24,7 @@ create-acceptance-cluster: kind
 
 .PHONY: install-cluster-api
 install-cluster-api: clusterctl
-	$(CLUSTERCTL) init --kubeconfig "$(KUBECONFIG)" --infrastructure=aws --wait-providers || true
+	$(CLUSTERCTL) init --kubeconfig "$(KUBECONFIG)" --infrastructure=gcp --wait-providers || true
 
 .PHONY: deploy-acceptance-cluster
 deploy-acceptance-cluster: docker-build create-acceptance-cluster install-cluster-api deploy
