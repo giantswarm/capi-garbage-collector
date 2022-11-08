@@ -26,7 +26,7 @@ func NewClient(client *compute.RoutesClient) *Client {
 func (c *Client) DeleteRoutes(ctx context.Context, cluster *capg.GCPCluster) error {
 	logger := c.getLogger(ctx)
 	project := cluster.Spec.Project
-	filter := fmt.Sprintf(`name : "%s*"`, cluster.Name)
+	filter := fmt.Sprintf(`name : "%s-*"`, cluster.Name)
 
 	req := &computepb.ListRoutesRequest{
 		Filter:  &filter,

@@ -20,6 +20,8 @@ import (
 	"context"
 
 	"github.com/go-logr/logr"
+	"github.com/pkg/errors"
+	apimachineryerrors "k8s.io/apimachinery/pkg/api/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
@@ -59,8 +61,11 @@ func (r *GCPClusterReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 	cluster := &capg.GCPCluster{}
 	err := r.Get(ctx, req.NamespacedName, cluster)
 	if err != nil {
-		logger.Error(err, "could not get the gcp cluster")
-		return reconcile.Result{}, nil
+		if apimachineryerrors.IsNotFound(err) {
+			logger.Info("GCP Cluster no longer exists")
+			return ctrl.Result{}, nil
+		}
+		return ctrl.Result{}, errors.WithStack(err)
 	}
 
 	if !cluster.DeletionTimestamp.IsZero() {

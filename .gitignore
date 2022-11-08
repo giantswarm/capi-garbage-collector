@@ -27,5 +27,3 @@ testbin/*
 helm/rendered/*
 
 .DS_Store
-
-config/
