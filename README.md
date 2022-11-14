@@ -2,5 +2,8 @@
 
 # capi-garbage-collector
 
-clean up leftover resources  caused by bugs or unexpected situations
+Clean up leftover resources caused by bugs or unexpected situations
 
+| Resource Name      | Reason |
+| :---        |    :----:   |
+| MachinePool      | !machinePool.DeletionTimestamp.IsZero()       |
