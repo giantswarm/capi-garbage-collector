@@ -17,6 +17,10 @@ import (
 	"github.com/giantswarm/capi-garbage-collector/pkg/key"
 )
 
+var (
+	CAPIMachinePoolFinalizer = "machinepool.cluster.x-k8s.io"
+)
+
 type GarbageCollectorController struct {
 	client ctrlclient.Client
 }
@@ -45,7 +49,7 @@ func (r *GarbageCollectorController) Reconcile(ctx context.Context, req ctrl.Req
 	if err != nil {
 		if k8sErrors.IsNotFound(err) {
 			logger.Info("MachinePool no longer exists")
-			return ctrl.Result{}, nil
+			return ctrl.Result{Requeue: false}, nil
 		}
 		return ctrl.Result{}, microerror.Mask(err)
 	}
@@ -67,7 +71,7 @@ func (r *GarbageCollectorController) reconcileDelete(ctx context.Context, machin
 	if k8sErrors.IsNotFound(err) {
 		logger.Info("kubeconfig for the cluster no longer exists, cleaning machine pool")
 
-		if len(machinePool.Finalizers) == 1 {
+		if len(machinePool.Finalizers) == 1 && machinePool.Finalizers[0] == CAPIMachinePoolFinalizer {
 			machinePool.Finalizers = []string{}
 			err = r.client.Update(ctx, machinePool)
 			if err != nil {

@@ -1,6 +1,6 @@
 
 # Image URL to use all building/pushing image targets
-IMG ?= docker.io/giantswarm/aws-network-topology-operator:dev
+IMG ?= docker.io/giantswarm/capi-garbage-collector:dev
 
 # Substitute colon with space - this creates a list.
 # Word selects the n-th element of the list
@@ -61,8 +61,8 @@ endif
 .PHONY: render
 render: architect
 	mkdir -p $(shell pwd)/helm/rendered
-	cp -r $(shell pwd)/helm/aws-network-topology-operator $(shell pwd)/helm/rendered/
-	$(ARCHITECT) helm template --dir $(shell pwd)/helm/rendered/aws-network-topology-operator
+	cp -r $(shell pwd)/helm/capi-garbage-collector $(shell pwd)/helm/rendered/
+	$(ARCHITECT) helm template --dir $(shell pwd)/helm/rendered/capi-garbage-collector
 
 .PHONY: deploy
 deploy: manifests render ensure-deploy-envs ## Deploy controller to the K8s cluster specified in ~/.kube/config.
@@ -72,13 +72,13 @@ deploy: manifests render ensure-deploy-envs ## Deploy controller to the K8s clus
 		--set managementClusterName=$(MANAGEMENT_CLUSTER_NAME) \
 		--set managementClusterNamespace=$(MANAGEMENT_CLUSTER_NAMESPACE) \
 		--wait \
-		aws-network-topology-operator helm/rendered/aws-network-topology-operator
+		capi-garbage-collector helm/rendered/capi-garbage-collector
 
 .PHONY: undeploy
 undeploy: ## Undeploy controller from the K8s  specified in ~/.kube/config.
 	KUBECONFIG="$(KUBECONFIG)" helm uninstall \
 		--namespace giantswarm \
-		aws-network-topology-operator
+		capi-garbage-collector
 
 ##@ App
 
@@ -87,7 +87,7 @@ ensure-schema-gen:
 
 .PHONY: schema-gen
 schema-gen: ensure-schema-gen ## Generates the values schema file
-	@cd helm/aws-network-topology-operator && helm schema-gen values.yaml > values.schema.json
+	@cd helm/capi-garbage-collector && helm schema-gen values.yaml > values.schema.json
 
 ##@ Build Dependencies
 
