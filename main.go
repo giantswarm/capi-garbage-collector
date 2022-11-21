@@ -18,7 +18,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"os"
 
 	// Import all Kubernetes client auth plugins (e.g. Azure, GCP, OIDC, etc.)
@@ -55,15 +54,11 @@ func main() {
 	var metricsAddr string
 	var enableLeaderElection bool
 	var probeAddr string
-	var managementClusterName string
-	var managementClusterNamespace string
 	flag.StringVar(&metricsAddr, "metrics-bind-address", ":8080", "The address the metric endpoint binds to.")
 	flag.StringVar(&probeAddr, "health-probe-bind-address", ":8081", "The address the probe endpoint binds to.")
 	flag.BoolVar(&enableLeaderElection, "leader-elect", false,
 		"Enable leader election for controller manager. "+
 			"Enabling this will ensure there is only one active controller manager.")
-	flag.StringVar(&managementClusterName, "management-cluster-name", "", "The name of the Cluster CR for the management cluster")
-	flag.StringVar(&managementClusterNamespace, "management-cluster-namespace", "", "The namespace of the Cluster CR for the management cluster")
 	opts := zap.Options{
 		Development: true,
 	}
@@ -71,11 +66,6 @@ func main() {
 	flag.Parse()
 
 	ctrl.SetLogger(zap.New(zap.UseFlagOptions(&opts)))
-
-	if managementClusterName == "" || managementClusterNamespace == "" {
-		setupLog.Error(fmt.Errorf("management-cluster-name and management-cluster-namespace required"), "Management Cluster details required")
-		os.Exit(1)
-	}
 
 	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), ctrl.Options{
 		Scheme:                 scheme,
