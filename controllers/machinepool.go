@@ -49,7 +49,7 @@ func (r *GarbageCollectorController) Reconcile(ctx context.Context, req ctrl.Req
 	if err != nil {
 		if k8sErrors.IsNotFound(err) {
 			logger.Info("MachinePool no longer exists")
-			return ctrl.Result{Requeue: false}, nil
+			return ctrl.Result{}, nil
 		}
 		return ctrl.Result{}, microerror.Mask(err)
 	}
