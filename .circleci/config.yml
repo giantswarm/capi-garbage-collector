@@ -51,7 +51,7 @@ workflows:
       # an image gets pushed to the Aliyun registry.
       - architect/push-to-docker:
           name: push-to-aliyun
-          image: "registry-intl.cn-shanghai.aliyuncs.com/giantswarm/capi-garbage-collector"
+          image: "giantswarm-registry.cn-shanghai.cr.aliyuncs.com/giantswarm/capi-garbage-collector"
           username_envar: "ALIYUN_USERNAME"
           password_envar: "ALIYUN_PASSWORD"
           requires:
