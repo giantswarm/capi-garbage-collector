@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.5] - 2023-02-01
+
 ### Added
 
 - Allow the capi-garbage-collector SA to create events 
@@ -39,7 +41,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[Unreleased]: https://github.com/giantswarm/capi-garbage-collector/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/giantswarm/capi-garbage-collector/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/giantswarm/capi-garbage-collector/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/giantswarm/capi-garbage-collector/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/giantswarm/capi-garbage-collector/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/giantswarm/capi-garbage-collector/compare/v0.1.1...v0.1.2
