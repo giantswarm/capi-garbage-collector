@@ -55,7 +55,7 @@ func (r *GarbageCollectorController) Reconcile(ctx context.Context, req ctrl.Req
 		return r.reconcileDelete(ctx, &machinePool, logger)
 	}
 
-	return ctrl.Result{Requeue: true, RequeueAfter: time.Minute * 5}, nil
+	return ctrl.Result{}, nil
 }
 
 func (r *GarbageCollectorController) reconcileDelete(ctx context.Context, machinePool *capi.MachinePool, logger logr.Logger) (ctrl.Result, error) {
