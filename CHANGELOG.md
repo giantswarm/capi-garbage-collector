@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use patch when deleting the finalizer from the `MachinePools`.
+- Use right format on dates when logging.
 
 ## [0.1.5] - 2023-02-01
 
