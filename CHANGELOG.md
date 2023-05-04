@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use patch when deleting the finalizer from the `MachinePools`.
+
 ## [0.1.5] - 2023-02-01
 
 ### Added
