@@ -4,14 +4,11 @@ import (
 	"fmt"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
-const (
-	ClusterNameLabel = "cluster.x-k8s.io/cluster-name"
+	capi "sigs.k8s.io/cluster-api/api/v1beta1"
 )
 
 func GetClusterIDFromLabels(t v1.ObjectMeta) string {
-	return t.GetLabels()[ClusterNameLabel]
+	return t.GetLabels()[capi.ClusterLabelName]
 }
 
 func KubeconfigSecretName(clusterName string) string {

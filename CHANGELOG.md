@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use patch when deleting the finalizer from the `MachinePools`.
+- Use right format on dates when logging.
+- Don't requeue `MachinePools` that are not being deleted. When they are deleted, they will be queued anyway.
+- Give RBAC permissions to watch `Secrets` to avoid `client-go` errors when managing the client cache for `Secrets`.
+
 ## [0.1.5] - 2023-02-01
 
 ### Added
